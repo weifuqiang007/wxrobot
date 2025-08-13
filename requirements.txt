@@ -1,0 +1,10 @@
+psutil>=5.9.6
+pyautogui>=0.9.54
+pycaw>=20240210
+pywin32>=308
+pywin32-ctypes>=0.2.2
+pywinauto>=0.6.8
+pillow>=11.1.0
+emoji>=2.14.1
+# pip install Django=5.2.5
+# django 的基本命令： https://www.runoob.com/django/django-install.html
