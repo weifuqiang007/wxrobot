@@ -2392,7 +2392,7 @@ class FriendSettings():
             main_window.close()
     
     @staticmethod
-    def add_new_friend(wechat_number:str,request_content:str=None,wechat_path:str=None,is_maximize:bool=True,close_wechat:bool=True)->None:
+   def add_new_friend(wechat_number:str,request_content:str=None,wechat_path:str=None,is_maximize:bool=True,close_wechat:bool=True)->None:
         '''
         该方法用来添加新朋友,微信对添加好友的检测机制比较严格,建议添加好友频率不要太高\n
         Args:
@@ -7847,7 +7847,7 @@ def delete_friend(friend:str,search_pages:int=5,wechat_path:str=None,is_maximize
     if close_wechat:
         main_window.close()
     
-def add_new_friend(wechat_number:str,request_content:str=None,wechat_path:str=None,is_maximize:bool=True,close_wechat:bool=True)->None:
+ def add_new_friend(wechat_number:str,request_content:str=None,wechat_path:str=None,is_maximize:bool=True,close_wechat:bool=True)->None:
     '''
     该函数用来添加新朋友,微信对添加好友的检测机制比较严格,建议添加好友频率不要太高\n
     Args:

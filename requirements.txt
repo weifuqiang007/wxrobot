@@ -1,3 +1,31 @@
+# 微信自动化核心库
+pywinauto>=0.6.8
+pyautogui>=0.9.54
+
+# Web API框架
+Flask>=2.3.0
+Flask-CORS>=4.0.0
+
+# HTTP请求库
+requests>=2.31.0
+
+# 数据处理
+psutil>=5.9.0
+
+# 日志和配置
+PyYAML>=6.0
+
+# 系统工具
+pillow>=10.0.0
+opencv-python>=4.8.0
+
+# 开发工具（可选）
+pytest>=7.4.0
+pytest-cov>=4.1.0
+black>=23.7.0
+flake8>=6.0.0
+
+# pywechat的安装依赖包
 psutil>=5.9.6
 pyautogui>=0.9.54
 pycaw>=20240210
@@ -6,5 +34,3 @@ pywin32-ctypes>=0.2.2
 pywinauto>=0.6.8
 pillow>=11.1.0
 emoji>=2.14.1
-# pip install Django=5.2.5
-# django 的基本命令： https://www.runoob.com/django/django-install.html
