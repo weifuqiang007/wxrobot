@@ -18,6 +18,7 @@ welcome_controller = WelcomeController()
 def start_welcome_monitoring():
     """
     启动新成员欢迎监听
+    这个接口是 启动新成员欢迎监听 的API端点，用于开始监控微信群聊中的新成员加入事件并自动发送欢迎消息。
     
     POST /api/welcome/monitoring/start
     
@@ -29,6 +30,18 @@ def start_welcome_monitoring():
     
     Returns:
         JSON响应
+        {
+    "data": {
+        "duration": "24h",
+        "monitored_groups": [
+            "测试微信发送消息"
+        ],
+        "start_time": 1756346048.6187952,
+        "status": "started"
+    },
+    "message": "新成员欢迎监听已启动，监听 1 个群组",
+    "success": true
+}
     """
     return welcome_controller.start_welcome_monitoring()
 

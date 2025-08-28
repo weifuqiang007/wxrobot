@@ -62,34 +62,39 @@ class WelcomeService:
             
         Returns:
             dict: 处理结果
+
+
         """
+
+        #todo 这里需要做数据库的查询
+        if self.monitoring:
+            return {
+                'success': False,
+                'message': '新成员欢迎监听已在运行中',
+                'data': {
+                    'status': 'already_running',
+                    'start_time': self.start_time,
+                    'monitored_groups': self.monitored_groups
+                }
+            }
+        
+        # 验证持续时间格式
+        if not self._validate_duration_format(duration):
+            return {
+                'success': False,
+                'message': f'持续时间格式无效: {duration}，请使用如 "1h", "30m", "2d" 等格式',
+                'data': None
+            }
+        
+        # 设置监听的群组
+        if groups is None:
+            # 获取所有群组
+            all_groups = self.wechat_dao.get_groups_list()
+            self.monitored_groups = all_groups
+        else:
+            self.monitored_groups = groups
+            
         try:
-            if self.monitoring:
-                return {
-                    'success': False,
-                    'message': '新成员欢迎监听已在运行中',
-                    'data': {
-                        'status': 'already_running',
-                        'start_time': self.start_time,
-                        'monitored_groups': self.monitored_groups
-                    }
-                }
-            
-            # 验证持续时间格式
-            if not self._validate_duration_format(duration):
-                return {
-                    'success': False,
-                    'message': f'持续时间格式无效: {duration}，请使用如 "1h", "30m", "2d" 等格式',
-                    'data': None
-                }
-            
-            # 设置监听的群组
-            if groups is None:
-                # 获取所有群组
-                all_groups = self.wechat_dao.get_groups_list()
-                self.monitored_groups = all_groups
-            else:
-                self.monitored_groups = groups
             
             # 启动监听线程
             self.monitoring = True

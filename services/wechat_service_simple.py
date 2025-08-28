@@ -339,6 +339,9 @@ class WechatService:
         Returns:
             List[str]: 群聊名称列表
         """
+
+        # todo 需要获取用户的群组（自动或者是手动）
+        # 需要链接上数据库进行查询
         # 模拟返回
         return ["群聊1", "群聊2", "群聊3"]
 
