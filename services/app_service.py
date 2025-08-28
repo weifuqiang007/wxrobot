@@ -6,6 +6,7 @@
 """
 
 from app_fixed import WechatBackendApp
+
 import logging
 
 class AppService:

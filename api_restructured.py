@@ -5,6 +5,7 @@
 采用MVC架构模式，分离路由、控制器和服务层
 """
 
+from pickle import TRUE
 from flask import Flask
 from flask_cors import CORS
 import logging
@@ -17,7 +18,8 @@ from routes import (
     config_bp,
     message_bp,
     news_bp,
-    contact_bp
+    contact_bp,
+    welcome_bp
 )
 
 def create_app(config_file="config.json"):
@@ -111,6 +113,7 @@ def register_blueprints(app):
     app.register_blueprint(message_bp)
     app.register_blueprint(news_bp)
     app.register_blueprint(contact_bp)
+    app.register_blueprint(welcome_bp)
     
     app.logger.info("所有路由蓝图注册完成")
 
@@ -127,7 +130,7 @@ def main():
         app.run(
             host='0.0.0.0',
             port=5000,
-            debug=False,
+            debug=True,
             threaded=True
         )
         

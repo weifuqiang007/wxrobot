@@ -6,8 +6,8 @@ import logging
 from datetime import datetime
 
 from config import ConfigManager
-from wechat_service_simple import WechatService
-from news_service import NewsService
+from services.wechat_service_simple import WechatService
+from services.news_service import NewsService
 
 class WechatBackendApp:
     """
@@ -39,9 +39,17 @@ class WechatBackendApp:
         # 运行状态
         self.is_running = False
         
-        # 注册信号处理器
-        signal.signal(signal.SIGINT, self._signal_handler)
-        signal.signal(signal.SIGTERM, self._signal_handler)
+        # 注册信号处理器（仅在主线程中）
+        try:
+            import threading
+            if threading.current_thread() is threading.main_thread():
+                signal.signal(signal.SIGINT, self._signal_handler)
+                signal.signal(signal.SIGTERM, self._signal_handler)
+                self.logger.info("信号处理器已注册")
+            else:
+                self.logger.info("非主线程，跳过信号处理器注册")
+        except Exception as e:
+            self.logger.warning(f"注册信号处理器失败: {e}，继续初始化")
         
         self.logger.info("微信后端应用初始化完成")
     

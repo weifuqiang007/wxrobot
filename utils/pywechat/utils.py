@@ -1,10 +1,10 @@
 import time
 import pyautogui
 from functools import wraps
-from .pywechat.WechatAuto import *
-from .pywechat.Uielements import (Main_window,SideBar,Independent_window,Buttons,SpecialMessages,
+from pywechat.WechatAuto import *
+from pywechat.Uielements import (Main_window,SideBar,Independent_window,Buttons,SpecialMessages,
 Edits,Texts,TabItems,Lists,Panes,Windows,CheckBoxes,MenuItems,Menus,ListItems)
-from .pywechat.WechatTools import match_duration
+from pywechat.WechatTools import match_duration
 #######################################################################################
 language=Tools.language_detector()#有些功能需要判断语言版本
 Main_window=Main_window()#主界面UI

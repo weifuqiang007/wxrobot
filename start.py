@@ -1,6 +1,10 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
+该模块暂时没啥用
+
+在大规模部署的时候可能会用到一些检查的方法
+
 微信后端系统快速启动脚本
 
 这个脚本提供了一个简单的菜单界面，方便用户选择不同的启动方式
@@ -61,7 +65,7 @@ def start_cli_service():
     """
     print("🚀 启动命令行服务...")
     try:
-        from .cli import main
+        from .cli_fixed import main
         main()
     except ImportError:
         # 如果直接运行脚本，使用subprocess
@@ -76,7 +80,7 @@ def start_api_service():
     print("按 Ctrl+C 停止服务")
     
     try:
-        from .api import main
+        from .api_restructured import main
         main()
     except ImportError:
         subprocess.run([sys.executable, "-m", "wechat_backend.api"])
@@ -150,7 +154,7 @@ def show_api_guide():
     
     print("\n示例API调用:")
     print("   curl http://127.0.0.1:5000/api/status")
-    print('   curl -X POST http://127.0.0.1:5000/api/news/groups -H "Content-Type: application/json" -d \'{"group_name":"测试群"}\'")
+    print('   curl -X POST http://127.0.0.1:5000/api/news/groups -H "Content-Type: application/json" -d \'{"group_name":"测试群"}\'')
 
 def run_example():
     """
@@ -218,6 +222,7 @@ def main():
         
         try:
             if choice == "1":
+                # 启动命令行服务
                 start_cli_service()
             elif choice == "2":
                 start_api_service()

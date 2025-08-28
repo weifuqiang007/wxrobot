@@ -2,21 +2,24 @@
 # -*- coding: utf-8 -*-
 """
 消息管理控制器
+只负责接口设计，不包含业务逻辑
 """
 
-from services.app_service import AppService
+from typing import Dict, Any
+from services.message_service import MessageService
 
 class MessageController:
     """
     消息管理控制器
+    只负责接口设计，不包含业务逻辑
     """
     
     def __init__(self):
-        self.app_service = AppService()
+        self.message_service = MessageService()
     
-    def send_message(self, data):
+    def send_message(self, data: Dict[str, Any]) -> Dict[str, Any]:
         """
-        发送消息
+        发送消息接口
         
         Args:
             data (dict): 消息数据
@@ -24,44 +27,50 @@ class MessageController:
         Returns:
             dict: 发送结果
         """
-        try:
-            app_instance = self.app_service.get_app_instance()
+        target = data.get('target')
+        message = data.get('message')
+        target_type = data.get('type', 'friend')
+        
+        return self.message_service.send_message_business_logic(target, message, target_type)
+    
+    def start_message_monitoring(self, duration: str = "1h") -> Dict[str, Any]:
+        """
+        启动消息监控接口
+        
+        Args:
+            duration (str): 监控持续时间
             
-            if not app_instance:
-                return {
-                    "success": False,
-                    "error": "微信后端应用未初始化",
-                    "status_code": 500
-                }
+        Returns:
+            dict: 启动结果
+        """
+        return self.message_service.start_monitoring_business_logic(duration)
+    
+    def stop_message_monitoring(self) -> Dict[str, Any]:
+        """
+        停止消息监控接口
+        
+        Returns:
+            dict: 停止结果
+        """
+        return self.message_service.stop_monitoring_business_logic()
+    
+    def get_monitoring_status(self) -> Dict[str, Any]:
+        """
+        获取监控状态接口
+        
+        Returns:
+            dict: 监控状态信息
+        """
+        return self.message_service.get_monitoring_status_business_logic()
+    
+    def set_auto_reply_message(self, message: str) -> Dict[str, Any]:
+        """
+        设置自动回复消息接口
+        
+        Args:
+            message (str): 自动回复消息内容
             
-            target = data.get('target')
-            message = data.get('message')
-            target_type = data.get('type', 'friend')  # 默认为好友
-            
-            if not target or not message:
-                return {
-                    "success": False,
-                    "error": "缺少目标或消息内容",
-                    "status_code": 400
-                }
-            
-            success = app_instance.send_message(target, message, target_type)
-            
-            if success:
-                return {
-                    "success": True,
-                    "message": f"消息已发送到 {target}"
-                }
-            else:
-                return {
-                    "success": False,
-                    "error": "发送消息失败",
-                    "status_code": 500
-                }
-                
-        except Exception as e:
-            return {
-                "success": False,
-                "error": str(e),
-                "status_code": 500
-            }
+        Returns:
+            dict: 设置结果
+        """
+        return self.message_service.set_auto_reply_message_business_logic(message)
